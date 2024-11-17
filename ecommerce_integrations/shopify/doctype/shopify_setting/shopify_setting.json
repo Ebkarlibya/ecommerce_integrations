@@ -33,6 +33,7 @@
   "sync_sales_invoice",
   "add_shipping_as_item",
   "consolidate_taxes",
+  "eis_submit_synced_order",
   "section_break_22",
   "html_16",
   "taxes",
@@ -387,12 +388,19 @@
    "fieldtype": "Link",
    "label": "Default Shipping Charges Account",
    "options": "Account"
+  },
+  {
+   "default": "0",
+   "description": "When ticking this field any new Synced Sales orders will be submitted.",
+   "fieldname": "eis_submit_synced_order",
+   "fieldtype": "Check",
+   "label": "EIS Submit Synced Order"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-10-24 10:38:49.247431",
+ "modified": "2024-11-17 08:55:45.655605",
  "modified_by": "Administrator",
  "module": "shopify",
  "name": "Shopify Setting",
