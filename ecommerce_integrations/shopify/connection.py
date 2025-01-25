@@ -94,7 +94,7 @@ def get_callback_url() -> str:
     """
     url = get_current_domain_name()
 
-    # return f"https://khbr5xfk-8000.euw.devtunnels.ms/api/method/ecommerce_integrations.shopify.connection.store_request_data"
+    # return f"https://q3h57gps-8000.euw.devtunnels.ms/api/method/ecommerce_integrations.shopify.connection.store_request_data"
     return f"https://{url}/api/method/ecommerce_integrations.shopify.connection.store_request_data"
 
 
