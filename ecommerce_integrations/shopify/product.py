@@ -567,8 +567,8 @@ def map_erpnext_item_to_shopify(shopify_product: Product, erpnext_item):
 
     # shopify_product.title = erpnext_item.item_name
     shopify_product.title = (
-        erpnext_item.custom_shopify_item_name
-        if erpnext_item.custom_shopify_item_name
+        erpnext_item.custom_shopify_shopify_item_name
+        if erpnext_item.custom_shopify_shopify_item_name
         else erpnext_item.item_name
     )
 

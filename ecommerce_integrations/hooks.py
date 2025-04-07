@@ -226,6 +226,7 @@ fixtures = [
                 (
                     # Item
                     "Item-custom_shopify_item_name",
+                    "Item-custom_shopify_shopify_item_name",
                 ),
             ]
         ],
