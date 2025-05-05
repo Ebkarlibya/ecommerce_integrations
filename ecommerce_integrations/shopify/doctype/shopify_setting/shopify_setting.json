@@ -23,6 +23,8 @@
   "cash_bank_account",
   "column_break_19",
   "cost_center",
+  "creation_user",
+  "price_list",
   "section_break_25",
   "sales_order_series",
   "delivery_note_series",
@@ -395,12 +397,28 @@
    "fieldname": "eis_submit_synced_order",
    "fieldtype": "Check",
    "label": "EIS Submit Synced Order"
+  },
+  {
+   "description": "The user that will be used to create Customers, Items and Sales Orders. This user should have the relevant permissions.",
+   "fieldname": "creation_user",
+   "fieldtype": "Link",
+   "label": "Creation User",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "description": "Price List to sync item prices to woocommerce",
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "Price List",
+   "options": "Price List",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-11-17 08:55:45.655605",
+ "modified": "2025-05-05 10:36:02.693850",
  "modified_by": "Administrator",
  "module": "shopify",
  "name": "Shopify Setting",

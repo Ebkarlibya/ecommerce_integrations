@@ -34,8 +34,9 @@ DEFAULT_TAX_FIELDS = {
 
 def sync_sales_order(payload, request_id=None):
     order = payload
-    frappe.set_user("Administrator")
     frappe.flags.request_id = request_id
+    setting = frappe.get_doc(SETTING_DOCTYPE)
+    frappe.set_user(setting.creation_user)
 
     if frappe.db.get_value("Sales Order", filters={ORDER_ID_FIELD: cstr(order["id"])}):
         create_shopify_log(
@@ -58,7 +59,6 @@ def sync_sales_order(payload, request_id=None):
 
         create_items_if_not_exist(order)
 
-        setting = frappe.get_doc(SETTING_DOCTYPE)
         create_order(order, setting)
     except Exception as e:
         create_shopify_log(status="Error", exception=e, rollback=True)

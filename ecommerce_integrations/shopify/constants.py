@@ -9,19 +9,19 @@ OLD_SETTINGS_DOCTYPE = "Shopify Settings"
 API_VERSION = "2024-01"
 
 WEBHOOK_EVENTS = [
-	"orders/create",
-	"orders/paid",
-	"orders/fulfilled",
-	"orders/cancelled",
-	"orders/partially_fulfilled",
+    "orders/create",
+    "orders/paid",
+    "orders/fulfilled",
+    "orders/cancelled",
+    "orders/partially_fulfilled",
 ]
 
 EVENT_MAPPER = {
-	"orders/create": "ecommerce_integrations.shopify.order.sync_sales_order",
-	"orders/paid": "ecommerce_integrations.shopify.invoice.prepare_sales_invoice",
-	"orders/fulfilled": "ecommerce_integrations.shopify.fulfillment.prepare_delivery_note",
-	"orders/cancelled": "ecommerce_integrations.shopify.order.cancel_order",
-	"orders/partially_fulfilled": "ecommerce_integrations.shopify.fulfillment.prepare_delivery_note",
+    "orders/create": "ecommerce_integrations.shopify.order.sync_sales_order",
+    "orders/paid": "ecommerce_integrations.shopify.invoice.prepare_sales_invoice",
+    "orders/fulfilled": "ecommerce_integrations.shopify.fulfillment.prepare_delivery_note",
+    "orders/cancelled": "ecommerce_integrations.shopify.order.cancel_order",
+    "orders/partially_fulfilled": "ecommerce_integrations.shopify.fulfillment.prepare_delivery_note",
 }
 
 SHOPIFY_VARIANTS_ATTR_LIST = ["option1", "option2", "option3"]

@@ -413,11 +413,21 @@ def upload_erpnext_item(doc, method=None):
         map_erpnext_item_to_shopify(shopify_product=product, erpnext_item=template_item)
         is_successful = product.save()
 
+        price = frappe.db.get_value(
+            "Item Price",
+            {
+                "item_code": item.name,
+                "price_list": setting.price_list,
+                "selling": 1,
+            },
+            "price_list_rate",
+        )
+
         if is_successful:
             update_default_variant_properties(
                 product,
                 sku=template_item.item_code,
-                price=template_item.get(ITEM_SELLING_RATE_FIELD),
+                price=price if price else item.get(ITEM_SELLING_RATE_FIELD),
                 is_stock_item=template_item.is_stock_item,
             )
             if item.variant_of:
@@ -480,11 +490,20 @@ def upload_erpnext_item(doc, method=None):
             map_erpnext_item_to_shopify(
                 shopify_product=product, erpnext_item=template_item
             )
+            price = frappe.db.get_value(
+                "Item Price",
+                {
+                    "item_code": item.name,
+                    "price_list": setting.price_list,
+                    "selling": 1,
+                },
+                "price_list_rate",
+            )
             if not item.variant_of:
                 update_default_variant_properties(
                     product,
                     is_stock_item=template_item.is_stock_item,
-                    price=item.get(ITEM_SELLING_RATE_FIELD),
+                    price=price if price else item.get(ITEM_SELLING_RATE_FIELD),
                 )
             else:
                 variant_attributes = {
