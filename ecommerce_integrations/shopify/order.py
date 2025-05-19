@@ -1,5 +1,5 @@
 import json
-from typing import Literal, Optional
+from typing import Literal
 
 import frappe
 from frappe import _
@@ -23,7 +23,8 @@ from ecommerce_integrations.shopify.product import (
     get_item_code,
 )
 from ecommerce_integrations.shopify.utils import create_shopify_log
-from ecommerce_integrations.utils.price_list import get_dummy_price_list
+
+# from ecommerce_integrations.utils.price_list import get_dummy_price_list
 from ecommerce_integrations.utils.taxation import get_dummy_tax_category
 
 DEFAULT_TAX_FIELDS = {
@@ -124,7 +125,7 @@ def create_sales_order(shopify_order, setting, company=None):
                 or nowdate(),
                 "delivery_date": getdate(shopify_order.get("created_at")) or nowdate(),
                 "company": setting.company,
-                "selling_price_list": get_dummy_price_list(),
+                "selling_price_list": setting.price_list,
                 "ignore_pricing_rule": 1,
                 "items": items,
                 "taxes": taxes,
