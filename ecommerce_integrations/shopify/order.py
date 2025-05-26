@@ -168,10 +168,12 @@ def get_order_items(order_items, setting, delivery_date, taxes_inclusive):
 
         if all_product_exists:
             item_code = get_item_code(shopify_item)
+            item_name = frappe.db.get_value("Item", item_code, "item_name")
             items.append(
                 {
                     "item_code": item_code,
-                    "item_name": shopify_item.get("name"),
+                    # "item_name": shopify_item.get("name"),
+                    "item_name": item_name,
                     "rate": _get_item_price(shopify_item, taxes_inclusive),
                     "delivery_date": delivery_date,
                     "qty": shopify_item.get("quantity"),
