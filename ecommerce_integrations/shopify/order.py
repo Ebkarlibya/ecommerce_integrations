@@ -51,8 +51,10 @@ def sync_sales_order(payload, request_id=None):
         shopify_customer["billing_address"] = order.get("billing_address", "")
         shopify_customer["shipping_address"] = order.get("shipping_address", "")
         customer_id = shopify_customer.get("id")
+        frappe.log_error("tst", [customer_id, shopify_customer])
         if customer_id:
             customer = ShopifyCustomer(customer_id=customer_id)
+            frappe.log_error("tst", [customer.is_synced()])
             if not customer.is_synced():
                 customer.sync_customer(customer=shopify_customer)
             else:

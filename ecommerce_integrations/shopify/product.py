@@ -9,6 +9,7 @@ from shopify.resources import Product, Variant
 from ecommerce_integrations.ecommerce_integrations.doctype.ecommerce_item import (
     ecommerce_item,
 )
+
 from ecommerce_integrations.shopify.connection import temp_shopify_session
 from ecommerce_integrations.shopify.constants import (
     ITEM_SELLING_RATE_FIELD,

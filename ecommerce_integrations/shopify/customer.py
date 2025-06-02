@@ -20,7 +20,11 @@ class ShopifyCustomer(EcommerceCustomer):
 
     def sync_customer(self, customer: dict[str, Any]) -> None:
         """Create Customer in ERPNext using shopify's Customer dict."""
+        # Check if customer already exists
+        customer_exists = check_if_customer_exists(customer)
+        if customer_exists.get("success"):
 
+            return
         customer_name = (
             cstr(customer.get("first_name")) + " " + cstr(customer.get("last_name"))
         )
@@ -166,3 +170,34 @@ def _map_address_fields(shopify_address, customer_name, address_type, email):
         address_fields["phone"] = phone
 
     return address_fields
+
+
+def check_if_customer_exists(customer: dict[str, Any]) -> bool:
+    """Check if customer exists in ERPNext using shopify's Customer dict."""
+    shopify_id = customer.get("id")
+    customer_name = f"{cstr(customer.get('first_name'))} {cstr(customer.get('last_name'))} - {cstr(customer.get('phone'))}"
+    if frappe.db.exists(
+        {
+            "doctype": "Customer",
+            CUSTOMER_ID_FIELD: shopify_id,
+            "customer_name": customer_name,
+        }
+    ):
+        return {"success": True, "message": "shopify_id"}
+    meta = frappe.get_meta("Customer")
+
+    # Check if the field exists
+    if meta.has_field("custom_customer_mobile_number"):
+        customer_docname = frappe.db.exists(
+            "Customer",
+            {
+                "custom_customer_mobile_number": customer.get("phone"),
+            },
+        )
+        if customer_docname:
+            frappe.db.set_value(
+                "Customer", customer_docname, CUSTOMER_ID_FIELD, shopify_id
+            )
+            return {"success": True, "message": "Phone"}
+
+    return {"success": False, "message": "not found"}
