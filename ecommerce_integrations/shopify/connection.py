@@ -4,7 +4,6 @@ import hashlib
 import hmac
 import json
 
-from ecommerce_integrations.shopify.order import sync_sales_order
 import frappe
 from frappe import _
 from shopify.resources import Webhook
